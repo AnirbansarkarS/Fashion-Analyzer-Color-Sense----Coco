@@ -33,10 +33,36 @@ def detect_and_crop_person(img, scale=1.1, min_neighbors=5):
 ##### commented ... will be testted......######
 
 def extract_color_palette(img, n_colors=5):
-    """
-    Extract dominant colors using KMeans clustering
-    Returns color palette with RGB values and names
-    """
+    try:
+        # Reshape image to list of pixels
+        pixels = img.reshape((-1, 3))
+        pixels = np.float32(pixels)
+
+        # KMeans clustering
+        kmeans = KMeans(n_clusters=n_colors, n_init=10, random_state=42)
+        kmeans.fit(pixels)
+
+        colors = np.uint8(kmeans.cluster_centers_)
+
+        # Convert BGR to RGB and create palette
+        palette = []
+        for color in colors:
+            bgr = color
+            rgb = [int(bgr[2]), int(bgr[1]), int(bgr[0])]  # BGR to RGB
+            hex_color = rgb_to_hex(rgb)
+            color_name = get_color_name(rgb)
+
+            palette.append({
+                "rgb": rgb,
+                "hex": hex_color,
+                "name": color_name
+            })
+
+        return palette
+
+    except Exception as e:
+        print(f"Error in extract_color_palette: {e}")
+        return None
 
 
 def rgb_to_hex(rgb):
