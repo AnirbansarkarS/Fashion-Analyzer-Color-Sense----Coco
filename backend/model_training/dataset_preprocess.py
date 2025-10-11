@@ -32,7 +32,7 @@ def preprocess_image(image_bytes, target_size=(224, 224)):
 def detect_and_crop_person(img, scale=1.1, min_neighbors=5):
 ##### commented ... will be testted......######
 
-def extract_color_palette(img, n_colors=5):
+ def extract_color_palette(img, n_colors=5):
     try:
         # Reshape image to list of pixels
         pixels = img.reshape((-1, 3))
@@ -93,10 +93,14 @@ def get_color_name(rgb):
             return "Blue"
         else:
             return "Dark Blue"
-    elif r > 150 and g > 100 and b < 100:
+    elif r > 150 and g < 100 and b < 100:
         return "Orange"
     elif r > 100 and g < 100 and b > 100:
         return "Purple"
+    elif r > 200 and g > 200 and b < 100:
+        return "Yellow"
+    elif r < 100 and g > 150 and b > 150:
+        return "Cyan"
     else:
         return "Gray"
 
