@@ -1,22 +1,11 @@
 import numpy as np
-from model_training.train_model import FashionModel
 
 def predict_fashion_score(image, model=None):
-    """
-    Main prediction function
-    Input: preprocessed image (224x224x3, normalized to 0-1)
-    Output: fashion score details
-    """
-    
+    """Main prediction function"""
     if model is None:
-        model = FashionModel()
-        try:
-            model.load_model("models/fashion_model.h5")
-        except:
-            print("Model not found. Using default scoring.")
-            return get_default_score()
+        print("⚠ Model not provided. Using default scoring.")
+        return get_default_score()
     
-    # Make prediction
     prediction = model.predict(image)
     
     if prediction is None:
@@ -33,15 +22,10 @@ def get_default_score():
     }
 
 def batch_predict(images, model=None):
-    """
-    Predict scores for multiple images
-    Input: list of preprocessed images
-    Output: list of predictions
-    """
-    
+    """Predict scores for multiple images"""
     if model is None:
-        model = FashionModel()
-        model.load_model("models/fashion_model.h5")
+        print("⚠ Model not provided.")
+        return None
     
     predictions = []
     for img in images:
@@ -51,9 +35,7 @@ def batch_predict(images, model=None):
     return predictions
 
 def get_feature_importance(prediction):
-    """
-    Analyze which features contributed most to the score
-    """
+    """Analyze which features contributed most to the score"""
     style_match = prediction.get('style_match', 0)
     texture_quality = prediction.get('texture_quality', 0)
     confidence = prediction.get('confidence', 0)
