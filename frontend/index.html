@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Style Rater</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="upload-section">
+      <div class="upload-box" id="uploadBox">
+        <input type="file" id="fileInput" accept="image/*" hidden>
+        <img id="previewImage" alt="Preview" style="display:none;">
+        <p id="uploadText">Drag & Drop your outfit photo<br>or <span id="browseText">Browse</span></p>
+      </div>
+    </div>
+
+    <button id="rateBtn">RATE MY STYLE</button>
+
+    <div class="result-section">
+      <div class="score-container">
+        <div class="circle">
+          <span id="styleScore">--</span>
+        </div>
+        <p class="score-label">STYLE SCORE<br><small>out of 10</small></p>
+      </div>
+
+      <div class="recommendations">
+        <h3>RECOMMENDATIONS:</h3>
+        <ul id="recommendationList"></ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
