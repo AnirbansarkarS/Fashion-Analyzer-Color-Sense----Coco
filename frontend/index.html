@@ -1,38 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Style Rater</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Style Rater</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <div class="upload-section">  
-      <div class="upload-box" id="uploadBox">
-        <input type="file" id="fileInput" accept="image/*" hidden>
-        <img id="previewImage" alt="Preview" style="display:none;">
-        <p id="uploadText">Drag & Drop your outfit photo<br>or <span id="browseText">Browse</span></p>
-      </div>
+    <div class="container">
+        <header>
+            <h1 class="animate-fadeIn">AI Fashion Analyzer</h1>
+        </header>
+        
+        <main class="app-container">
+            <div class="card-container">
+                <div class="card-inner">
+                    <section class="upload-section">
+                        <div class="drop-zone" id="drop-zone">
+                            <div class="drop-zone-content" id="drop-zone-content">
+                                <svg class="animate-pulse" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                                <p class="animate-fadeIn">Drag & Drop your outfit photo here</p>
+                                <span class="animate-fadeIn">or</span>
+                                <label for="file-input" class="browse-button animate-fadeIn">Browse Files</label>
+                                <input type="file" id="file-input" hidden accept="image/*">
+                            </div>
+                            <img id="uploaded-image" class="uploaded-image hidden" src="#" alt="Uploaded Image">
+                        </div>
+                        <button class="rate-button animate-pulse" id="rate-button">
+                            <span>Rate My Style</span>
+                        </button>
+                    </section>
+
+                    <section class="results-section hidden" id="results-section">
+                        <div class="spinner hidden" id="spinner"></div> 
+                        <div class="results-content hidden" id="results-content">
+                            <div class="score-circle animate-fadeIn">
+                                <div class="score-text">
+                                    <span class="score-value">7.8</span>
+                                    <span class="score-label">STYLE SCORE</span>
+                                </div>
+                            </div>
+                            <div class="recommendations-box animate-slideIn">
+                                <h3>RECOMMENDATIONS:</h3>
+                                <ul>
+                                    <li class="animate-item-1">✨ Accessorize with a delicate necklace</li>
+                                    <li class="animate-item-2">👠 Try pairing with white heeled boots</li>
+                                    <li class="animate-item-3">☀ Perfect for a sprinting event!</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
     </div>
 
-    <button id="rateBtn">RATE MY STYLE</button>
-
-    <div class="result-section">
-      <div class="score-container">
-        <div class="circle">
-          <span id="styleScore">--</span>
-        </div>
-        <p class="score-label">STYLE SCORE<br><small>out of 10</small></p>
-      </div>
-
-      <div class="recommendations">
-        <h3>RECOMMENDATIONS:</h3>
-        <ul id="recommendationList"></ul>
-      </div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
+
