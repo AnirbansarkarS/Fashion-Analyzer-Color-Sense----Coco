@@ -6,7 +6,7 @@ def calculate_fashion_score(ml_features=None, color_palette=None, image=None, sk
     
     scores = {}
     
-    # 1️⃣ ML-based features (35%)
+    #  ML-based features (35%)
     if ml_features is not None:
         scores['style_match'] = round((ml_features.get('style_match', 0.55) * 10) + np.random.uniform(-1, 1), 1)
         scores['texture_quality'] = round((ml_features.get('texture_quality', 0.55) * 10) + np.random.uniform(-1, 1), 1)
@@ -14,23 +14,23 @@ def calculate_fashion_score(ml_features=None, color_palette=None, image=None, sk
         scores['style_match'] = np.random.uniform(4.5, 6.5)
         scores['texture_quality'] = np.random.uniform(4.5, 6.5)
     
-    # 2️⃣ Skin tone compatibility (25%)
+    #  Skin tone compatibility (25%)
     if skin_tone:
         scores['skin_compatibility'] = calculate_skin_tone_compatibility(skin_tone, color_palette)
     else:
         scores['skin_compatibility'] = np.random.uniform(4.5, 6.5)
     
-    # 3️⃣ Color harmony (20%)
+    #  Color harmony (20%)
     scores['color_harmony'] = calculate_color_harmony(color_palette) if color_palette else np.random.uniform(4, 6.5)
     
-    # 4️⃣ Image quality (10%)
+    # Image quality (10%)
     if image is not None:
         quality_raw = check_image_quality(image)
         scores['image_quality'] = np.clip((quality_raw / 100) * 10 + np.random.uniform(-0.5, 0.5), 3.5, 9.5)
     else:
         scores['image_quality'] = np.random.uniform(4, 6.5)
     
-    # 5️⃣ Grooming / Style heuristics (10%)
+    #  Grooming / Style heuristics (10%)
     scores['grooming_heuristics'] = calculate_mens_heuristic_score(color_palette, skin_tone) if color_palette else np.random.uniform(4.5, 6.5)
     
     # Weighted final score
@@ -39,7 +39,7 @@ def calculate_fashion_score(ml_features=None, color_palette=None, image=None, sk
         0.25 * scores['skin_compatibility'] +
         0.20 * scores['color_harmony'] +
         0.10 * scores['image_quality'] +
-        0.10 * scores['grooming_heuristics']
+        0.10 * scores['grooming_heuristics'] + 2.5
     )
     final_score = np.clip(round(final_score, 1), 2.5, 9.8)
     
@@ -149,7 +149,6 @@ def is_classic_mens_combination(color_names):
     ]
     return any(all(c in color_names for c in combo) for combo in classic_combos)
 
-
 # ✅ Recommendations
 def generate_mens_recommendations(scores, color_palette, skin_tone):
     recommendations = []
@@ -198,7 +197,6 @@ def generate_mens_recommendations(scores, color_palette, skin_tone):
             "priority": "low"
         })
     return recommendations
-
 
 def get_score_feedback(score):
     if score >= 9:
